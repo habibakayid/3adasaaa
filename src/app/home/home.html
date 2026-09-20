@@ -13,10 +13,10 @@
   </p>
 
   <div class="flex justify-center gap-4 mt-8">
-    <button class="border border-border-light text-white px-6 py-3 rounded-full">
-      اعرف المزيد
-    </button>
     <a routerLink="/blog" class="bg-primary text-white px-6 py-3 rounded-full">استكشف المقالات</a>
+    <a routerLink="/about" class="border border-border-light text-white px-6 py-3 rounded-full">
+      اعرف المزيد
+    </a>
   </div>
 
   <div class="grid grid-cols-4 gap-4 max-w-2xl mx-auto mt-12">
@@ -44,20 +44,23 @@
 
 <section class="max-w-6xl mx-auto px-6 py-10" dir="rtl">
   <div class="flex items-center justify-between mb-6">
-   
     <div class="text-right">
       <h2 class="text-3xl font-bold text-white">مقالات مختارة</h2>
       <p class="text-gray-400 text-sm mt-1">محتوى منتقى لبدء رحلة تعلمك</p>
     </div>
-     <a routerLink="/blog"
-       class="bg-primary text-white px-5 py-2 rounded-full font-bold flex items-center gap-2 w-fit">
-      عرض الكل 
+    <a
+      routerLink="/blog"
+      class="bg-primary text-white px-5 py-2 rounded-full font-bold flex items-center gap-2 w-fit"
+    >
+      عرض الكل
     </a>
   </div>
 
   @for (post of featured; track post.id) {
-    <a [routerLink]="['/blog', post.slug]"
-       class="flex bg-dark-card border border-border rounded-3xl overflow-hidden mb-5">
+    <a
+      [routerLink]="['/blog', post.slug]"
+      class="flex bg-dark-card border border-border rounded-3xl overflow-hidden mb-5"
+    >
       <img [src]="post.image" [alt]="post.title" class="w-1/2 object-cover" />
       <div class="p-8">
         <p class="text-primary">{{ post.category }}</p>
@@ -86,13 +89,18 @@
 </section>
 
 <section class="max-w-6xl mx-auto px-6 py-10" dir="rtl">
-  <h2 class="text-3xl font-bold mb-6 text-white">أحدث المقالات</h2>
+  <div class="flex items-center justify-between mb-6">
+    
+    <h2 class="text-3xl font-bold text-white">أحدث المقالات</h2>
+    <a routerLink="/blog"
+       class="bg-primary text-white px-5 py-2 rounded-full font-bold flex items-center gap-2 w-fit">
+      جميع المقالات 
+    </a>
+  </div>
+
   <div class="grid grid-cols-3 gap-6">
     @for (post of latest; track post.id) {
-      <a
-        [routerLink]="['/blog', post.slug]"
-        class="block rounded-3xl bg-dark-card border border-border overflow-hidden"
-      >
+      <a [routerLink]="['/blog', post.slug]" class="block rounded-3xl bg-dark-card border border-border overflow-hidden">
         <img [src]="post.image" [alt]="post.title" class="h-48 w-full object-cover" />
         <div class="p-5">
           <p class="text-primary text-sm">{{ post.category }}</p>

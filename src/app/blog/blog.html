@@ -32,20 +32,20 @@
 <section class="max-w-6xl mx-auto px-6 pb-6 flex items-center justify-between" dir="rtl">
 
    <p class="text-gray-400">عرض {{ filteredPosts.length }} مقالات</p>
-   
+
   <div class="flex gap-2">
     <button
       (click)="setView('list')"
       class="w-10 h-10 rounded-lg flex items-center justify-center text-white"
       [class.bg-primary]="viewMode === 'list'"
       [class.bg-dark-tertiary]="viewMode !== 'list'"
-    >☰</button>
+    ><i class="fa-solid fa-list"></i></button>
     <button
       (click)="setView('grid')"
       class="w-10 h-10 rounded-lg flex items-center justify-center text-white"
       [class.bg-primary]="viewMode === 'grid'"
       [class.bg-dark-tertiary]="viewMode !== 'grid'"
-    >▦</button>
+    ><i class="fa-solid fa-table-cells-large"></i></button>
   </div>
 
  

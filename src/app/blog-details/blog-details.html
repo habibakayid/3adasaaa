@@ -1,0 +1,31 @@
+@if (post) {
+  <article class="max-w-3xl mx-auto px-6 py-16" dir="rtl">
+    <a routerLink="/blog" class="text-primary">← كل المقالات</a>
+
+    <p class="mt-6 text-primary">{{ post.category }}</p>
+    <h1 class="text-4xl font-black text-white mt-2">{{ post.title }}</h1>
+
+    <div class="flex items-center gap-3 mt-4">
+      <img [src]="post.author.avatar" [alt]="post.author.name" class="w-10 h-10 rounded-full" />
+      <div>
+        <p class="text-white font-bold text-sm">{{ post.author.name }}</p>
+        <p class="text-gray-400 text-xs">{{ post.author.role }} · {{ post.date }} · {{ post.readTime }}</p>
+      </div>
+    </div>
+
+    <img [src]="post.image" [alt]="post.title" class="w-full rounded-3xl mt-8" />
+
+    <p class="mt-8 leading-9 text-gray-300 whitespace-pre-line">{{ post.content }}</p>
+
+    <div class="flex flex-wrap gap-2 mt-10">
+      @for (tag of post.tags; track tag) {
+        <span class="bg-dark-tertiary text-gray-300 text-sm px-3 py-1 rounded-full">#{{ tag }}</span>
+      }
+    </div>
+  </article>
+} @else {
+  <div class="text-center py-24" dir="rtl">
+    <p class="text-white text-xl">المقال غير موجود</p>
+    <a routerLink="/blog" class="text-primary mt-4 inline-block">الرجوع لكل المقالات</a>
+  </div>
+}

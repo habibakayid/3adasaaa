@@ -1,0 +1,83 @@
+<section class="text-center py-20 px-6" dir="rtl">
+  <span class="inline-block bg-primary/10 text-primary text-sm px-4 py-1 rounded-full mb-4">
+    مرحباً بك في عدسة
+  </span>
+
+  <h1 class="text-5xl font-black leading-tight text-white">
+    اكتشف <span class="text-primary">فن</span><br />
+    التصوير الفوتوغرافي
+  </h1>
+
+  <p class="text-gray-400 mt-4 max-w-xl mx-auto">
+    انغمس في أسرار المحترفين ونصائح عملية لتطوير مهاراتك في التصوير.
+  </p>
+
+  <div class="flex justify-center gap-4 mt-8">
+    <button class="border border-border-light text-white px-6 py-3 rounded-full">اعرف المزيد</button>
+    <a routerLink="/blog" class="bg-primary text-white px-6 py-3 rounded-full">استكشف المقالات</a>
+  </div>
+
+  <div class="grid grid-cols-4 gap-4 max-w-2xl mx-auto mt-12">
+    <div class="bg-dark-card border border-border rounded-2xl p-4">
+      <p class="text-2xl font-bold text-white">6</p>
+      <p class="text-gray-400 text-sm">كاتب</p>
+    </div>
+    <div class="bg-dark-card border border-border rounded-2xl p-4">
+      <p class="text-2xl font-bold text-white">{{ categories.length }}</p>
+      <p class="text-gray-400 text-sm">تصنيفات</p>
+    </div>
+    <div class="bg-dark-card border border-border rounded-2xl p-4">
+      <p class="text-2xl font-bold text-white">10ألف+</p>
+      <p class="text-gray-400 text-sm">قارئ</p>
+    </div>
+    <div class="bg-dark-card border border-border rounded-2xl p-4">
+      <p class="text-2xl font-bold text-white">50+</p>
+      <p class="text-gray-400 text-sm">مقالة</p>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-10" dir="rtl">
+  <h2 class="text-3xl font-bold mb-6 text-white">مقالات مختارة</h2>
+
+  @for (post of featured; track post.id) {
+    <a [routerLink]="['/blog', post.slug]"
+       class="flex bg-dark-card border border-border rounded-3xl overflow-hidden mb-5">
+      <img [src]="post.image" [alt]="post.title" class="w-1/2 object-cover" />
+      <div class="p-8">
+        <p class="text-primary">{{ post.category }}</p>
+        <h3 class="text-2xl font-bold mt-2 text-white">{{ post.title }}</h3>
+        <p class="text-gray-400 mt-2">{{ post.excerpt }}</p>
+        <p class="text-sm text-gray-500 mt-4">{{ post.author.name }} · {{ post.date }}</p>
+      </div>
+    </a>
+  }
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-10" dir="rtl">
+  <h2 class="text-3xl font-bold mb-6 text-white">استكشف حسب الموضوع</h2>
+  <div class="grid grid-cols-5 gap-4">
+    @for (cat of categories; track cat.name) {
+      <div class="bg-dark-card border border-border rounded-3xl p-6 text-center">
+        <h3 class="font-bold text-white">{{ cat.name }}</h3>
+        <p class="text-sm text-gray-400">{{ cat.count }} مقالات</p>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-10" dir="rtl">
+  <h2 class="text-3xl font-bold mb-6 text-white">أحدث المقالات</h2>
+  <div class="grid grid-cols-3 gap-6">
+    @for (post of latest; track post.id) {
+      <a [routerLink]="['/blog', post.slug]" class="block rounded-3xl bg-dark-card border border-border overflow-hidden">
+        <img [src]="post.image" [alt]="post.title" class="h-48 w-full object-cover" />
+        <div class="p-5">
+          <p class="text-primary text-sm">{{ post.category }}</p>
+          <h3 class="mt-2 font-bold text-white">{{ post.title }}</h3>
+          <p class="mt-2 text-sm text-gray-400">{{ post.excerpt }}</p>
+        </div>
+      </a>
+    }
+  </div>
+</section>

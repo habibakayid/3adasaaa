@@ -1,0 +1,100 @@
+<section class="max-w-6xl mx-auto px-6 py-16 text-center" dir="rtl">
+  <h1 class="text-5xl font-black text-white">استكشف <span class="text-primary">مقالاتنا</span></h1>
+  <p class="text-gray-400 mt-4">اكتشف الدروس والرؤى وأفضل الممارسات للتطوير الحديث</p>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 pb-8 flex flex-wrap items-center gap-3" dir="rtl">
+  <button
+    (click)="setCategory('الكل')"
+    class="px-5 py-2 rounded-full font-bold"
+    [class.bg-primary]="activeCategory === 'الكل'"
+    [class.text-white]="activeCategory === 'الكل'"
+    [class.bg-dark-tertiary]="activeCategory !== 'الكل'"
+    [class.text-gray-300]="activeCategory !== 'الكل'"
+  >
+    جميع المقالات
+  </button>
+
+  @for (cat of categories; track cat.name) {
+    <button
+      (click)="setCategory(cat.name)"
+      class="px-5 py-2 rounded-full font-bold"
+      [class.bg-primary]="activeCategory === cat.name"
+      [class.text-white]="activeCategory === cat.name"
+      [class.bg-dark-tertiary]="activeCategory !== cat.name"
+      [class.text-gray-300]="activeCategory !== cat.name"
+    >
+      {{ cat.name }}
+    </button>
+  }
+</section>
+
+<section class="max-w-6xl mx-auto px-6 pb-6 flex items-center justify-between" dir="rtl">
+  <div class="flex gap-2">
+    <button
+      (click)="setView('list')"
+      class="w-10 h-10 rounded-lg flex items-center justify-center text-white"
+      [class.bg-primary]="viewMode === 'list'"
+      [class.bg-dark-tertiary]="viewMode !== 'list'"
+    >☰</button>
+    <button
+      (click)="setView('grid')"
+      class="w-10 h-10 rounded-lg flex items-center justify-center text-white"
+      [class.bg-primary]="viewMode === 'grid'"
+      [class.bg-dark-tertiary]="viewMode !== 'grid'"
+    >▦</button>
+  </div>
+
+  <p class="text-gray-400">عرض {{ filteredPosts.length }} مقالات</p>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 pb-16" dir="rtl">
+  <div
+    class="grid gap-6"
+    [class.grid-cols-3]="viewMode === 'grid'"
+    [class.grid-cols-1]="viewMode === 'list'"
+  >
+    @for (post of pagedPosts; track post.id) {
+      <a [routerLink]="['/blog', post.slug]"
+         class="block bg-dark-card border border-border rounded-3xl overflow-hidden"
+         [class.flex]="viewMode === 'list'">
+        <img [src]="post.image" [alt]="post.title"
+             class="object-cover"
+             [class.h-48]="viewMode === 'grid'"
+             [class.w-full]="viewMode === 'grid'"
+             [class.w-64]="viewMode === 'list'"
+             [class.h-full]="viewMode === 'list'" />
+        <div class="p-5">
+          <p class="text-primary text-sm">{{ post.category }}</p>
+          <h3 class="mt-2 font-bold text-xl text-white">{{ post.title }}</h3>
+          <p class="mt-2 text-sm text-gray-400">{{ post.excerpt }}</p>
+          <div class="flex items-center gap-2 mt-4">
+            <img [src]="post.author.avatar" [alt]="post.author.name" class="w-8 h-8 rounded-full" />
+            <p class="text-sm font-bold text-white">{{ post.author.name }}</p>
+          </div>
+        </div>
+      </a>
+    }
+  </div>
+
+  <div class="flex items-center justify-center gap-3 mt-10">
+    <button (click)="prevPage()" class="px-3 py-2 rounded-lg bg-dark-tertiary text-white">‹</button>
+
+    @for (page of [].constructor(totalPages); track $index; let i = $index) {
+      <button
+        (click)="goToPage(i + 1)"
+        class="px-4 py-2 rounded-lg font-bold"
+        [class.bg-primary]="currentPage === i + 1"
+        [class.text-white]="currentPage === i + 1"
+        [class.bg-dark-tertiary]="currentPage !== i + 1"
+        [class.text-gray-300]="currentPage !== i + 1"
+      >
+        {{ i + 1 }}
+      </button>
+    }
+
+    <button (click)="nextPage()" class="px-3 py-2 rounded-lg bg-dark-tertiary text-white">›</button>
+  </div>
+
+  <p class="text-center text-gray-400 mt-4">صفحة {{ currentPage }} من {{ totalPages }}</p>
+</section>

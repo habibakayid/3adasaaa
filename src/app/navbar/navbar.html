@@ -1,0 +1,29 @@
+<header class="flex items-center justify-between px-8 py-4 bg-dark border-b border-border" dir="rtl">
+  <div class="text-right">
+    <h1 class="text-white font-bold text-xl">عدسة</h1>
+    <p class="text-primary text-xs">عالم التصوير الفوتوغرافي</p>
+  </div>
+
+  <nav class="flex items-center gap-2">
+  <a routerLink="/"
+     routerLinkActive="bg-primary text-white"
+     [routerLinkActiveOptions]="{exact: true}"
+     class="px-4 py-2 rounded-full text-gray-200 hover:text-white">
+    الرئيسية
+  </a>
+  <a routerLink="/blog"
+     routerLinkActive="bg-primary text-white"
+     class="px-4 py-2 rounded-full text-gray-200 hover:text-white">
+    المدونة
+  </a>
+  <a routerLink="/about"
+     routerLinkActive="bg-primary text-white"
+     class="px-4 py-2 rounded-full text-gray-200 hover:text-white">
+    من نحن
+  </a>
+</nav>
+
+  <div class="flex items-center gap-4">
+    <button class="px-5 py-2 rounded-full bg-primary text-white font-bold">ابدأ القراءة</button>
+  </div>
+</header>

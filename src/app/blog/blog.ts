@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import postsData from '../../assets/posts.json';
 
 @Component({
   selector: 'app-blog',
   imports: [RouterLink],
   templateUrl: './blog.html',
-   styleUrl: './blog.css',
+  styleUrl: './blog.css',
 })
 export class Blog {
   allPosts = postsData.posts;
@@ -16,6 +16,13 @@ export class Blog {
   viewMode: 'grid' | 'list' = 'grid';
   currentPage = 1;
   postsPerPage = 6;
+
+  constructor(private route: ActivatedRoute) {
+    const categoryFromUrl = this.route.snapshot.queryParamMap.get('category');
+    if (categoryFromUrl) {
+      this.activeCategory = categoryFromUrl;
+    }
+  }
 
   get filteredPosts() {
     if (this.activeCategory === 'الكل') {

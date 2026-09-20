@@ -30,6 +30,9 @@
 </section>
 
 <section class="max-w-6xl mx-auto px-6 pb-6 flex items-center justify-between" dir="rtl">
+
+   <p class="text-gray-400">عرض {{ filteredPosts.length }} مقالات</p>
+   
   <div class="flex gap-2">
     <button
       (click)="setView('list')"
@@ -45,7 +48,7 @@
     >▦</button>
   </div>
 
-  <p class="text-gray-400">عرض {{ filteredPosts.length }} مقالات</p>
+ 
 </section>
 
 <section class="max-w-6xl mx-auto px-6 pb-16" dir="rtl">
